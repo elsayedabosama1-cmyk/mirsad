@@ -427,7 +427,7 @@ const wb=n=>{const b=n.brand&&brOf(n.brand);return b&&b.logo?`<i class="wb" styl
 const brOf=id=>(X.brands||[]).find(b=>b.id===id);
 const brAct=()=>(X.brands||[]).filter(b=>b.active!==false&&!b.archived);
 function homeCats(){const h=X.home||{},o=h.order||[],hid=h.hidden||[];return[...o.filter(c=>CATS.includes(c)),...CATS.filter(c=>!o.includes(c))].filter(c=>!hid.includes(c))}
-const FBSLUG={'مرصد':'mirsad','by the way':'btw'};
+const FBSLUG={'مرصد':'mirsad','by the way':'btw','رادار مصر':'radar'};
 const fbUrl=u=>String(u||'').replace(/'/g,'%27').replace(/"/g,'%22');
 function fbPosts(b){const k=FBSLUG[nrm(b&&b.name||'')];const p=k&&FBP.pages&&FBP.pages[k];return p&&p.posts&&p.posts.length?p.posts:null}
 function fbCard(b){const ps=fbPosts(b),a=ps[0];return`<section class="bsc" style="--bc:${esc(b.color||'#C9A968')}"><div class="bsh" onclick="openBrand('${b.id}')">${b.logo?`<img src="${imgU(b.logo)}" alt="">`:`<i style="background:${esc(b.color||'#168C91')}">${esc((b.name||'?')[0])}</i>`}<b>${esc(b.name)}</b><small>فتح الصفحة ‹</small></div><div class="bsl" onclick="window.open('${fbUrl(a.url)}','_blank','noopener')" style="${a.img?`background-image:url(${fbUrl(a.img)})`:''}"><span>${esc(a.t)}</span></div>${ps.slice(1,4).map(p=>`<div class="bsi" onclick="window.open('${fbUrl(p.url)}','_blank','noopener')"><span style="flex:1">${esc(p.t)}</span><small>${ago(p.at)}</small></div>`).join('')}</section>`}
