@@ -1,0 +1,31 @@
+name: Sync Facebook page posts
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: fb-pages
+  cancel-in-progress: false
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Pull latest posts of مرصد and By the Way
+        env:
+          FB_TOKEN: ${{ secrets.FB_TOKEN }}
+        run: |
+          git config user.name "mirsad-bot"
+          git config user.email "mirsad-bot@users.noreply.github.com"
+          for i in 1 2 3 4; do
+            git fetch -q origin main && git reset -q --hard origin/main
+            python3 scripts/fb_pages.py
+            git add data/fb_pages.json
+            if git diff --cached --quiet; then echo "nothing new"; exit 0; fi
+            git commit -q -m "Sync Facebook page posts [skip ci]"
+            git push -q origin HEAD:main && exit 0
+            sleep 5
+          done
+          exit 1
