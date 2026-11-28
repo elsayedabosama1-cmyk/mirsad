@@ -200,7 +200,7 @@ if fetched:
         json.dump(NEWS, f, ensure_ascii=False, separators=(',', ':'))
 # prune old auto items (never touch items edited by a person)
 before = len(nlist)
-nlist[:] = [n for n in nlist if not (n.get('auto') and n.get('by') == 'auto' and n.get('at', now) < now - 7 * 86400000)]
+nlist[:] = [n for n in nlist if not (n.get('auto') and n.get('by') == 'auto' and n.get('at', now) < now - 3 * 86400000)]
 if pub or len(nlist) != before:
     nlist.sort(key=lambda n: n.get('at', 0), reverse=True)
     NEWS['news'] = nlist
