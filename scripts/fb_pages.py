@@ -16,7 +16,7 @@ OUT = os.path.join(ROOT, 'data', 'fb_pages.json')
 IMG_DIR = os.path.join(ROOT, 'photos', 'fb')
 IMG_REL = 'photos/fb'
 PAGES = [('mirsad', '1475210439010063', 'مرصد'), ('btw', '111570231877045', 'By the Way'),
-         ('radar', '1492208437299343', 'رادار مصر')]
+         ('radar', '1492208437299343', 'رادار مصر'), ('ain', '1443444155519047', 'عين مصر')]
 LIMIT = '8'
 
 
